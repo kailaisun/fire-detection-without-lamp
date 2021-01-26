@@ -22,13 +22,12 @@ pip install -r requirements.txt
 ```
 python demo.py --save-txt --savetxt --FLremove
 ```
-The results of the lamp and fire detection (suppression is not showed) is in the output folder。The file result.txt shows the fire probability.
+The results of the lamp and fire detection (suppression is not showed) is in the output folder. The file result.txt shows the fire probability.
 
 
 ```
 python demo.py --save-txt --savetxt --saveimg --FLremove
 ```
-在output文件夹里，查看灯光和火灾的检测结果（显示黑色抑制）。
 The results of the lamp and fire detection (suppression is showed) is in the output folder.
 
 ### Reference：
