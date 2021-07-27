@@ -1,14 +1,14 @@
 # fire-detection-without-lamp
  
 
-### Problems：
+<!-- ### Problems：
 ![image](https://github.com/kailaisun/fire-detection-without-lamp/blob/master/data/1.png)
 
 ### Methods：
 ![image](https://github.com/kailaisun/fire-detection-without-lamp/blob/master/data/2.png)
 
 ### Inceptionv4：
-![image](https://github.com/kailaisun/fire-detection-without-lamp/blob/master/data/4.bmp)
+![image](https://github.com/kailaisun/fire-detection-without-lamp/blob/master/data/4.bmp) -->
 
 
 ## Installation：
