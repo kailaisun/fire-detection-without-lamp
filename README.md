@@ -28,7 +28,13 @@ The results of the lamp and fire detection (suppression is not showed) is in the
 ```
 python demo.py --save-txt --savetxt --saveimg --FLremove
 ```
-The results of the lamp and fire detection (suppression is showed) is in the output folder.
+The results of the lamp and fire detection (Rectangular mask) is in the output folder.
+
+
+```
+python demo.py --save-txt --savetxt --saveimg --grabcut --FLremove
+```
+The results of the lamp and fire detection (Segmentation mask) is in the output folder.
 
 ### Reference：
  [Firenet](https://github.com/tobybreckon/fire-detection-cnn)， 
