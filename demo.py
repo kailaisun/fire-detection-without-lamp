@@ -5,6 +5,7 @@ from project.datasets import *
 from project.utils import *
 import cv2
 import os
+from project.grab_cut import seg
 import sys
 import math
 import numpy as np
@@ -378,16 +379,20 @@ def boxhandler(bbox):
     return bbox
 
 
-def boxcover(image,box):
+def boxcover(image,box,cut):
     w=image.shape[1]
     h=image.shape[0]
     box[1] = max(0, box[1]-5)
     box[3] = min(h, box[3]+5)
     box[0] = max(0, box[0]-5)
     box[2] = min(w, box[2]+5)
-    image[box[1]:box[3],box[0]:box[2],0] = 0
-    image[box[1]:box[3],box[0]:box[2],1] = 0
-    image[box[1]:box[3],box[0]:box[2],2] = 0
+    
+    if cut==False:
+        image[box[1]:box[3],box[0]:box[2],0] = 0
+        image[box[1]:box[3],box[0]:box[2],1] = 0
+        image[box[1]:box[3],box[0]:box[2],2] = 0
+    else:
+        image=seg(image,box[0],box[1],box[2],box[3])
     return image
 
 def detect():
@@ -548,7 +553,7 @@ def detect():
 
     print('Done. (%.3fs)' % (time.time() - t0))
 
-def imagedetect():
+def imagedetect(cut):
     model = construct_inceptionv4onfire(224, 224, training=False)
     model.load(os.path.join("models/InceptionV4-OnFire", "inceptionv4onfire"), weights_only=False)
     print("Loaded CNN network weights ...")
@@ -569,7 +574,12 @@ def imagedetect():
     for imagepath in imagepaths:
         if '.jpg' in imagepath or '.JPG' in imagepath:
             imagepath = imagepath.strip('\n')
-            image = cv2.imread(imagepath)
+            imgorpath=imagepath
+            
+            image = cv2.imread(imgorpath.replace(Source,source))
+            
+            #cv2.imshow('0',image)
+            #cv2.waitKey(0)
             print(imagepath)
             width = image.shape[1]
             height = image.shape[0]
@@ -588,7 +598,8 @@ def imagedetect():
                     if len(bbox) > 0:
                         boxhandler(bbox)
                         for box in bbox:
-                            image = boxcover(image, box)
+                            
+                            image = boxcover(image, box,cut)
             small_image = cv2.resize(image, (rows, cols), cv2.INTER_AREA)
             output = model.predict([small_image])
             if savetxt:
@@ -602,6 +613,11 @@ def imagedetect():
                     cv2.rectangle(image, (0, 0), (width, height), (0, 255, 0), 50)
                     cv2.putText(image, 'CLEAR', (int(width / 16), int(height / 4)),
                                 cv2.FONT_HERSHEY_SIMPLEX, 4, (255, 255, 255), 10, cv2.LINE_AA);
+                if cut==False:
+                    imagepath=imagepath.strip('.jpg')+'_box.jpg'
+                else:
+                    imagepath=imagepath.strip('.jpg')+'_grabcut.jpg'
+                print(Output+'/'+imagepath.strip('\n').split('/')[len(imagepath.split('/'))-1])
                 cv2.imwrite(Output+'/'+imagepath.strip('\n').split('/')[len(imagepath.split('/'))-1], image)
                 
     if savetxt:
@@ -617,7 +633,7 @@ if __name__ == '__main__':
     parser.add_argument('--source', type=str, default='data/samples', help='source')  # input file/folder, 0 for webcam
     parser.add_argument('--output', type=str, default='output', help='output folder')  # output folder
     parser.add_argument('--img-size', type=int, default=512, help='inference size (pixels)')
-    parser.add_argument('--conf-thres', type=float, default=0.11, help='object confidence threshold')
+    parser.add_argument('--conf-thres', type=float, default=0.01, help='object confidence threshold')
     parser.add_argument('--iou-thres', type=float, default=0.6, help='IOU threshold for NMS')
     parser.add_argument('--fourcc', type=str, default='mp4v', help='output video codec (verify ffmpeg support)')
     parser.add_argument('--half', action='store_true', help='half precision FP16 inference')
@@ -631,13 +647,14 @@ if __name__ == '__main__':
     parser.add_argument('--savetxt', action='store_true',help='save output')
     parser.add_argument('--saveimg', action='store_true',help='save img')
     parser.add_argument('--FLremove',action='store_true',help='remove firelike')
+    parser.add_argument('--grabcut', action='store_true', help='grabcut')
     parser.add_argument('--imgnum', type=int, default=-1)
     parser.add_argument('--Output', type=str, default='output')
     opt = parser.parse_args()
     opt.cfg = check_file(opt.cfg)  # check file
     opt.names = check_file(opt.names)  # check file
-    Source, savetxt, saveimg, FLremove, imgnum, Output = opt.Source, opt.savetxt, opt.saveimg, opt.FLremove, opt.imgnum, opt.Output
+    source,Source, savetxt, saveimg, FLremove, imgnum,cut, Output = opt.source,opt.Source, opt.savetxt, opt.saveimg, opt.FLremove, opt.imgnum, opt.grabcut,opt.Output
     #print(savetxt,saveimg,FLremove)
     with torch.no_grad():
         detect()
-    imagedetect()
+    imagedetect(cut)
