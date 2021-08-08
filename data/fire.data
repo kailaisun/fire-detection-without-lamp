@@ -1,0 +1,6 @@
+classes=1
+train=data/train-fireonly.txt
+valid=data/test.txt
+names=data/fire.names
+backup=backup/
+eval=coco
