@@ -52,11 +52,11 @@ put all the pictures and labels in a same folder(data/JPEGImages)
 If you want to train Fire-only weights:
 
 ```
- 'python3 train.py --epochs n(epochs you want) --weights weights/yolov3.pt --cfg cfg/yolov3-fireonly.cfg --data data/fire.data --name data/fire.name --single-cls' 
+ 'python3 train.py --epochs n(epochs you want) --weights weights/yolov3.pt --cfg cfg/yolov3-fireonly.cfg --data data/fire.data --name data/fire.names --single-cls' 
 ```
 If you want to train Fire-lamp weights:
 ```
- 'python3 train.py --epochs n(epochs you want) --weights weights/yolov3.pt --cfg cfg/yolov3.cfg --data data/fires.data --name data/fires.name' 
+ 'python3 train.py --epochs n(epochs you want) --weights weights/yolov3.pt --cfg cfg/yolov3.cfg --data data/fires.data --name data/fires.names' 
  ```
 
 ### Reference：
