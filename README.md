@@ -49,6 +49,7 @@ following its instruction,  then use
 ```
 ### How to train yolov3：
 put all the pictures and labels in a same folder(data/JPEGImages)
+
 If you want to train Fire-only weights:
 
 ```
