@@ -50,11 +50,11 @@ The results of the lamp and fire detection (Segmentation mask) is in the output 
 ```
 git clone https://github.com/EscVM/OIDv4_ToolKit.git 
 ```
-following its instruction,  then use
+following its instruction,  then use the following command to get lamp data:
 ```
 python3 main.py downloader --classes Lamp --type_csv train(test,validation)
 ```
-to get data of lamps. 
+ 
 ### How to train yolov3
 Put all the pictures and labels in a same folder(data/JPEGImages)
 
