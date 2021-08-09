@@ -13,7 +13,7 @@
 
 ## Installation：
 
-### Packages：
+### Packages
 Our project is developed based on [Firenet](https://github.com/tobybreckon/fire-detection-cnn). Please follow the official Firenet README.md for installation and preparation.
 
 #### A from-scratch setup script(linux)
@@ -42,7 +42,8 @@ python demo.py --save-txt --savetxt --saveimg --grabcut --FLremove
 ```
 The results of the lamp and fire detection (Segmentation mask) is in the output folder.
 
-## How to download data：
+## Train:
+### How to download data
 1.Download fire data from https://collections.durham.ac.uk/files/r2d217qp536#.X5F5G2gzZnK
 
 2.Download lamp data from openimageV4：
@@ -54,7 +55,7 @@ following its instruction,  then use
 python3 main.py downloader --classes Lamp --type_csv train(test,validation)
 ```
 to get data of lamps. 
-## How to train yolov3：
+### How to train yolov3
 Put all the pictures and labels in a same folder(data/JPEGImages)
 
 If you want to train Fire-only weights:
