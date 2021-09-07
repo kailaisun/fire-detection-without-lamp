@@ -1,5 +1,6 @@
 # fire-detection-without-lamp
  
+ Paper link: [Using knowledge inference to suppress the lamp disturbance for fire detection](https://www.sciencedirect.com/science/article/pii/S266644962100027X)
 
 <!-- ### Problems：
 ![image](https://github.com/kailaisun/fire-detection-without-lamp/blob/master/data/1.png)
