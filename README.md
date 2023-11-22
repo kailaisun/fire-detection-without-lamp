@@ -68,6 +68,21 @@ If you want to train Fire-lamp weights:
 ```
  python3 train.py --epochs n(epochs you want) --weights weights/yolov3.pt --cfg cfg/yolov3.cfg --data data/fires.data --name data/fires.names
  ```
+## Citation
+``` bash
+@article{SUN2021124,
+author = {Kailai Sun and Qianchuan Zhao and Xinwei Wang},
+title = {Using knowledge inference to suppress the lamp disturbance for fire detection},
+journal = {Journal of Safety Science and Resilience},
+volume = {2},
+number = {3},
+pages = {124-130},
+year = {2021},
+issn = {2666-4496},
+doi = {https://doi.org/10.1016/j.jnlssr.2021.07.002},
+url = {https://www.sciencedirect.com/science/article/pii/S266644962100027X},
+}
+```
 
 ## Reference：
  [Firenet](https://github.com/tobybreckon/fire-detection-cnn)， 
